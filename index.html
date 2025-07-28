@@ -3,69 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Senha (Simples)</title>
+    <title>Gerador de Senha Aleatória</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
         }
         .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 320px;
         }
-        input, select {
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label {
             font-size: 16px;
-            padding: 10px;
-            margin-top: 10px;
+            margin-top: 15px;
+            display: block;
+            color: #555;
+        }
+        input[type="number"], input[type="text"] {
+            font-size: 16px;
+            padding: 12px;
             width: 100%;
+            margin-top: 8px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-sizing: border-box;
+        }
+        input[type="text"] {
+            background-color: #e8e8e8;
+            font-weight: bold;
+            color: #333;
         }
         button {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             margin-top: 20px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #45a049;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Gerador de Senha (Simples)</h2>
-    <form action="#" method="POST">
-        <label for="comprimento">Comprimento da Senha:</label>
-        <select id="comprimento" name="comprimento">
-            <option value="8">8 caracteres</option>
-            <option value="12">12 caracteres</option>
-            <option value="16">16 caracteres</option>
-            <option value="20">20 caracteres</option>
-        </select>
-        <br>
-        <label for="tipo">Tipo de Senha:</label>
-        <select id="tipo" name="tipo">
-            <option value="alfanumerica">Alfanumérica (letras + números)</option>
-            <option value="com_simbolos">Com símbolos</option>
-        </select>
-        <br>
-        <button type="submit">Gerar Senha</button>
-    </form>
-    <p>Senha gerada: <strong>*****</strong></p>
+    <h2>Gerador de Senha Aleatória</h2>
+    <label for="comprimento">Comprimento da Senha:</label>
+    <input type="number" id="comprimento" value="12" min="8" max="32">
+    
+    <button onclick="gerarSenha()">Gerar Senha</button>
+    
+    <label for="senha">Senha Gerada:</label>
+    <input type="text" id="senha" readonly placeholder="Senha será exibida aqui">
+    
+    <div class="footer">
+        <p>Crie senhas fortes para sua segurança!</p>
+    </div>
 </div>
+
+<script>
+    function gerarSenha() {
+        const comprimento = document.getElementById("comprimento").value || 12;
+        const caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=<>?";
+        let senha = "";
+        
+        for (let i = 0; i < comprimento; i++) {
+            const randomIndex = Math.floor(Math.random() * caracteres.length);
+            senha += caracteres.charAt(randomIndex);
+        }
+
+        // Exibe a senha gerada no campo de entrada
+        document.getElementById("senha").value = senha;
+    }
+</script>
 
 </body>
 </html>
